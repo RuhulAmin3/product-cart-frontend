@@ -9,11 +9,7 @@ const ProductItem = ({ product }: any) => {
     <>
       <div className="shadow-lg bg-violet-300 p-3 rounded overflow-hidden shadow-lg">
         <Link to={`/products/${product.id}`}>
-          <img
-            className="w-full"
-            src="https://fabrilife.com/products/61961a4db1cd1-square.jpg?v=20"
-            alt="{title}"
-          />
+          <img className="w-full" src={product?.image[0]} alt="{title}" />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{product.title}</div>
             <p className="text-gray-700 text-base">{product.price}</p>
@@ -23,7 +19,7 @@ const ProductItem = ({ product }: any) => {
         <div className="px-6 py-4">
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             Buy Now
           </button>

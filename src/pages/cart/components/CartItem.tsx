@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import deleteSvg from "../../../assets/svg/delete.svg";
+import plusSvg from "../../../assets/svg/plus.svg";
 import { useDeleteCartProdMutation } from "../../../redux/features/cart/cart.api";
 import useToastAndApiHandler from "../../../hooks/useToastAndApiHandler";
 import Modal from "../../../components/Modal";
@@ -24,13 +25,13 @@ const CartItem = ({ cart }: any) => {
 
   return (
     <>
-      <tr className="bg-white border-b">
+      <tr className="bg-white border-b hover:bg-gray-200 ">
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex items-center gap-2">
           <div className="flex items-center gap-3">
             <img
               src="https://fabrilife.com/products/61961a4db1cd1-square.jpg?v=20"
               alt="t-shirt"
-              className="w-20 h-20 rounded-md"
+              className="w-20 h-20 rounded-md hidden md:block"
             />
             <Link to={`/products/${cart?.products?.id}`}>
               <p className="font-semibold text-blue-400 hover:underline">
@@ -66,7 +67,13 @@ const CartItem = ({ cart }: any) => {
               onClick={() => setShowModal(true)}
               className="cursor-pointer bg-green-500 bg-green-500 text-white w-[80%] mb-2"
             >
-              Add another size
+              <img
+                title="add another size"
+                src={plusSvg}
+                alt=""
+                className="w-10 h-10 sm:block md:hidden"
+              />
+              <span className="hidden md:block">Add another size</span>
             </button>
             <span
               onClick={() => handleDelete()}

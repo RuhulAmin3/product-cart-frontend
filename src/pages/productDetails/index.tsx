@@ -1,58 +1,111 @@
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { useGetSingleProductQuery } from "../../redux/features/products/products.api";
+import CardSkeleton from "../../components/CardSkeleton";
+import Modal from "../../components/Modal";
+import { useState } from "react";
 
 const ProductDetails = () => {
+  const [showModal, setShowModal] = useState(false);
   const { id } = useParams() || {};
-  const { data } = useGetSingleProductQuery(id);
-  const { title, image, slug, category, size, color, price, description } =
+  const { data, isLoading } = useGetSingleProductQuery(id as string);
+  const { title, category, image, size, color, price, description } =
     data?.data || {};
   return (
     <>
       <Header />
       <section className="container">
-        <div className="flex gap-7">
-          {/* image part */}
-          <div className="basis-1/2">
-            <img
-              src="https://fabrilife.com/products/61961a4db1cd1-square.jpg?v=20"
-              alt="t-shirt"
+        {isLoading ? (
+          <CardSkeleton />
+        ) : (
+          <div className="flex flex-col md:flex-row gap-10">
+            {/* image part */}
+            <div className="basis-1/2">
+              <img src={image[0]} alt="t-shirt" />
+
+              <div className="flex flex-row gap-2">
+                {Array.from({ length: 4 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="w-1/2 p-2 sm:w-1/4 my-4 cursor-pointer"
+                  >
+                    <div className="block border border-blue-100  hover:border-blue-300 p-2">
+                      <img
+                        src={image[0]}
+                        alt="image"
+                        className="object-cover w-full lg:h-32 "
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* content part */}
+            <div>
+              <h2 className="max-w-xl mt-2 mb-6 text-xl font-bold md:text-4xl">
+                {title}
+              </h2>
+
+              <p className="max-w-md mb-8 text-gray-700">
+                {description} Lorem ispum dor amet Lorem ispum dor amet Lorem
+                ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem
+                ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
+              </p>
+              <p className="inline-block text-2xl font-semibold text-gray-700 mb-3 py-5">
+                <span> {category}</span>
+              </p>
+              <p className="inline-block text-2xl font-semibold text-gray-700 border-b-2 border-gray-200 w-full mb-3 py-5">
+                <span>Price: ৳ {price}</span>
+              </p>
+              <div className="mb-8">
+                <h2 className="mb-2 text-xl font-bold ">Color</h2>
+                <div className="flex flex-wrap -mb-2">
+                  {color?.map((clr: string) => {
+                    console.log(clr);
+                    return (
+                      <div
+                        key={clr}
+                        className="p-1 mb-2 cursor-pointer mr-2 border border-transparent rounded-full hover:border-gray-400"
+                      >
+                        <div
+                          className={`w-6 h-6 bg-${clr}-500 rounded-full`}
+                        ></div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="pb-6 mb-8 border-b border-gray-300">
+                <h2 className="mb-2 text-xl font-bold">Size</h2>
+                <div className="flex flex-wrap -mb-2">
+                  {size?.map((s: string) => (
+                    <button
+                      key={s}
+                      className="py-1 mb-2 mr-1 border w-16 hover:border-blue-400 hover:text-blue-600"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="mb-4 mr-4 lg:mb-0">
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="w-full h-10 p-2 mr-4 bg-green-500 text-gray-50 hover:bg-green-700"
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            <Modal
+              product={data?.data}
+              showModal={showModal}
+              setShowModal={setShowModal}
             />
           </div>
-          {/* content part */}
-          <div>
-            <h3 className="text-xl text-gray-700">{title}</h3>
-            <p className="text-lg text-gray-700 my-4">Price: ৳ {price}</p>
-            <p className="text-lg font-bold text-gray-700">Select Size:</p>
-            <div className="flex gap-3">
-              {size?.map((s, idx) => (
-                <div
-                  // onClick={() => handleSize(s)}
-                  key={idx}
-                  className={`px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300`}
-                >
-                  {s}
-                </div>
-              ))}
-            </div>
-            <p className="text-lg font-bold text-gray-700">Select Color:</p>
-            <div className="flex gap-3">
-              {color?.map((clr, idx) => (
-                <div
-                  // onClick={() => handleSize(s)}
-                  key={idx}
-                  className={`px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300`}
-                >
-                  {clr}
-                </div>
-              ))}
-            </div>
-
-            <div>
-              <p>{description}</p>
-            </div>
-          </div>
-        </div>
+        )}
       </section>
     </>
   );

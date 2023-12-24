@@ -24,6 +24,7 @@ const CartSize = ({ cart }: any) => {
       },
     });
   };
+
   const successMessage = "cart updated successfully";
 
   useEffect(() => {

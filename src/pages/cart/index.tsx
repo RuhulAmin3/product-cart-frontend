@@ -62,7 +62,7 @@ const Carts = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.data?.map((cart) => (
+                  {data?.data?.map((cart: any) => (
                     <CartItem cart={cart} key={cart.id} />
                   ))}
                 </tbody>
