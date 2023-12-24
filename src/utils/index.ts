@@ -12,7 +12,10 @@ export const setIntoLocalStorage = (
 
 export const getFromLocalStorage = (key: string): string | null => {
   if (!key || typeof window !== "undefined") {
-    const token = localStorage.getItem(key);
+    let token = localStorage.getItem(key);
+    if (token) {
+      token = JSON.parse(token);
+    }
     return token;
   }
   return null;
