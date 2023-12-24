@@ -1,29 +1,29 @@
 import { useState } from "react";
 import Modal from "../../../components/Modal";
 import { Link } from "react-router-dom";
+import ShoppingCart from "../../../assets/icons/ShoppingCart";
 
 const ProductItem = ({ product }: any) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <div className="shadow-lg bg-violet-300 p-3 rounded overflow-hidden shadow-lg">
+      <div className="shadow-md overflow-hidden border border-transparent hover:border-primary hover:shadow-xl">
         <Link to={`/products/${product.id}`}>
           <img className="w-full" src={product?.image[0]} alt="{title}" />
-          <div className="px-6 py-4">
-            <div className="font-bold text-lg mb-2">{product.title}</div>
-            <p className="text-gray-700 text-base">{product.price}</p>
+          <div className="px-6 py-4 text-center">
+            <h3 className="font-bold text-lg">{product.title}</h3>
+            <p className="text-gray-700 text-base">৳ {product.price}</p>
             <p className="text-gray-700 text-base">{product.category}</p>
           </div>
         </Link>
-        <div className="px-6 py-4">
-          <button
-            onClick={() => setShowModal(true)}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Buy Now
-          </button>
-        </div>
+        <button
+          onClick={() => setShowModal(true)}
+          className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 w-full flex items-center justify-center gap-3"
+        >
+          <ShoppingCart size={1} />
+          Buy Now
+        </button>
       </div>
       <Modal
         product={product}

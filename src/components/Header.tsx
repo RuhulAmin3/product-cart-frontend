@@ -1,48 +1,54 @@
-import { Link } from "react-router-dom";
-import shoppingCart from "../assets/svg/shoppingCart.svg";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
 import logo from "../assets/images/logo.png";
 import { addSearchText } from "../redux/features/products/products.slice";
+import ShoppingCart from "../assets/icons/ShoppingCart";
+import LogOutIcon from "../assets/icons/LogoutIcon";
+import { removeFromLocalStorage } from "../utils";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const { cartLength } = useAppSelector((state) => state?.cart) || {};
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (value: string) => {
     dispatch(addSearchText(value));
   };
 
+  const handleLogout = () => {
+    removeFromLocalStorage("accessToken");
+    toast.success("user logout successfully");
+    navigate("/");
+  };
+
   return (
     <>
-      <header className="bg-blue-300 mb-4 text-gray-800 p-4 py-4">
+      <header className="text-gray-800 p-4 py-4 shadow-header-shadow sticky top-0 z-50 bg-white">
         <div className="container flex items-center justify-between">
-          {/* Left side - Logo */}
           <div className="flex items-center">
-            {/* <img src="/path/to/your/logo.png" alt="Logo" className="h-8 mr-2" /> */}
             <Link to={"/products"} className="font-bold text-lg">
-              <img src={logo} alt="classic it" className="h-12" />
+              <img src={logo} alt="classic it" className=" h-10  md:h-12" />
             </Link>
           </div>
-
-          {/* Middle - Search bar */}
           <div className="flex-grow text-center mx-4">
             <input
               onChange={(e) => handleChange(e.target.value)}
               type="text"
               placeholder="Search by title or category..."
-              className="w-1/2 p-2 rounded-md bg-white text-gray-800 border-2 border-gray-300 outline-none"
+              className="w-full md:w-1/2 p-2 bg-white text-gray-800 border-2 border-gray-200 outline-none focus:border-primary round-sm"
             />
           </div>
-
-          {/* Right side - Cart icon */}
-          <Link to="/carts" className="cursor-pointer">
-            <img
-              className="h-[40px] w-[40px]"
-              src={shoppingCart}
-              alt="shopping cart"
-            />
-            {cartLength}
+          <Link to="/carts" className="cursor-pointer relative mr-5">
+            <ShoppingCart />
+            <p className="absolute -top-2 -right-2 z-10 h-4 w-4 rounded-full bg-primary flex items-center justify-center text-white text-xs">
+              {cartLength}
+            </p>
           </Link>
+          <span onClick={() => handleLogout()} className="cursor-pointer">
+            {" "}
+            <LogOutIcon />
+          </span>
         </div>
       </header>
     </>

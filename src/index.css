@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap");
+
 @layer components {
   .wrapper {
     @apply flex md:items-center items-stretch justify-between flex-col md:flex-row pt-10 gap-10 md:gap-0;
@@ -34,4 +36,8 @@
     -webkit-appearance: none;
     margin: 0;
   }
+}
+
+svg {
+  cursor: pointer;
 }

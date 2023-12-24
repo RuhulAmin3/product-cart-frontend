@@ -37,9 +37,10 @@ export default {
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
       },
-    },
-    boxShadow: {
-      "form-shadow": "-24px 24px 72px -8px rgba(0, 0, 0, 0.24)",
+      boxShadow: {
+        "form-shadow": "-24px 24px 72px -8px rgba(0, 0, 0, 0.24)",
+        "header-shadow": "0 0 8px 0 rgba(0,0,0,.4)",
+      },
     },
     screens: {
       sm: "640px",

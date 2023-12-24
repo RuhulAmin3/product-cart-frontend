@@ -14,7 +14,7 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <section className="container">
+      <section className="container mt-6 font-Inter">
         {isLoading ? (
           <CardSkeleton />
         ) : (
@@ -29,7 +29,7 @@ const ProductDetails = () => {
                     key={idx}
                     className="w-1/2 p-2 sm:w-1/4 my-4 cursor-pointer"
                   >
-                    <div className="block border border-blue-100  hover:border-blue-300 p-2">
+                    <div className="block border hover:border-primary p-2">
                       <img
                         src={image[0]}
                         alt="image"
@@ -46,42 +46,39 @@ const ProductDetails = () => {
                 {title}
               </h2>
 
-              <p className="max-w-md mb-8 text-gray-700">
-                {description} Lorem ispum dor amet Lorem ispum dor amet Lorem
-                ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem
-                ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
+              <p className="max-w-md mb-8 text-gray-700">{description}</p>
+              <p className="inline-block text-lg">
+                Category:{" "}
+                <span className="text-gray-700 font-semibold">{category}</span>
               </p>
-              <p className="inline-block text-2xl font-semibold text-gray-700 mb-3 py-5">
-                <span> {category}</span>
-              </p>
-              <p className="inline-block text-2xl font-semibold text-gray-700 border-b-2 border-gray-200 w-full mb-3 py-5">
-                <span>Price: ৳ {price}</span>
+              <p className="inline-block text-lg text-gray-700 border-b-2 border-gray-200 w-full mb-3 py-5">
+                Price: <span className="font-semibold"> ৳ {price}</span>
               </p>
               <div className="mb-8">
-                <h2 className="mb-2 text-xl font-bold ">Color</h2>
+                <h2 className="mb-2 text-[28px] font-bold ">Color</h2>
                 <div className="flex flex-wrap -mb-2">
-                  {color?.map((clr: string) => {
-                    console.log(clr);
-                    return (
-                      <div
-                        key={clr}
-                        className="p-1 mb-2 cursor-pointer mr-2 border border-transparent rounded-full hover:border-gray-400"
-                      >
+                  {color &&
+                    color?.map((clr: string) => {
+                      return (
                         <div
-                          className={`w-6 h-6 bg-${clr}-500 rounded-full`}
-                        ></div>
-                      </div>
-                    );
-                  })}
+                          key={clr}
+                          className="p-1 mb-2 cursor-pointer mr-2 border border-transparent rounded-full hover:border-gray-400"
+                        >
+                          <div
+                            className={`w-6 h-6 bg-${clr}-500 rounded-full`}
+                          ></div>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
               <div className="pb-6 mb-8 border-b border-gray-300">
-                <h2 className="mb-2 text-xl font-bold">Size</h2>
+                <h2 className="mb-2 text-[28px] font-bold">Size</h2>
                 <div className="flex flex-wrap -mb-2">
                   {size?.map((s: string) => (
                     <button
                       key={s}
-                      className="py-1 mb-2 mr-1 border w-16 hover:border-blue-400 hover:text-blue-600"
+                      className="py-1 mb-2 mr-1 border w-16 hover:border-primary hover:text-primary"
                     >
                       {s}
                     </button>
@@ -92,7 +89,7 @@ const ProductDetails = () => {
                 <div className="mb-4 mr-4 lg:mb-0">
                   <button
                     onClick={() => setShowModal(true)}
-                    className="w-full h-10 p-2 mr-4 bg-green-500 text-gray-50 hover:bg-green-700"
+                    className="bg-gray-800 hover:bg-gray-900 w-full h-10 p-2 mr-4 text-gray-50"
                   >
                     Buy Now
                   </button>

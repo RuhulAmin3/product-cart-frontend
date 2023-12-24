@@ -1,6 +1,7 @@
 import CardSkeleton from "../../components/CardSkeleton";
 
 import Header from "../../components/Header";
+import HeroSection from "../../components/HeroSection";
 import ProductNotFound from "../../components/ProductNotFound";
 import { useDebounced } from "../../hooks/useDebounced";
 import { useAppSelector } from "../../redux/app/hooks";
@@ -24,8 +25,9 @@ const Products = () => {
   const { data, isLoading, isError } = useGetAllProductsQuery({ ...query });
 
   return (
-    <>
+    <div className="font-Inter">
       <Header />
+      <HeroSection />
       <div className="container">
         <div className="grid md:grid-cols-4 sm:grid-cols-1 gap-5">
           {isError && <h3 className="text-red-700">Someting is wrong</h3>}
@@ -39,7 +41,7 @@ const Products = () => {
         </div>
         {data?.data.length === 0 && <ProductNotFound />}
       </div>
-    </>
+    </div>
   );
 };
 

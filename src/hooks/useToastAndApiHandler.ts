@@ -17,7 +17,7 @@ const useToastAndApiHandler = <T, Error>(
     if (response.isSuccess && response.data) {
       toast.success(successMessage);
     } else if (response.isError && response.error) {
-      toast.error(response.error.data.errorMessages[0].message);
+      toast.error(response?.error?.data?.errorMessages[0]?.message);
     }
   }, [
     response.isSuccess,

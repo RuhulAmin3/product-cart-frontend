@@ -23,7 +23,7 @@ const Carts = () => {
   return (
     <>
       <Header />
-      <section className="container">
+      <section className="container font-Inter">
         <>
           {isLoading ? (
             <CartSkeleton />
