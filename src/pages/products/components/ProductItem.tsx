@@ -11,7 +11,7 @@ const ProductItem = ({ product }: any) => {
         <Link to={`/products/${product.id}`}>
           <img className="w-full" src={product?.image[0]} alt="{title}" />
           <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{product.title}</div>
+            <div className="font-bold text-lg mb-2">{product.title}</div>
             <p className="text-gray-700 text-base">{product.price}</p>
             <p className="text-gray-700 text-base">{product.category}</p>
           </div>

@@ -1,37 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useToastAndApiHandler from "../../../hooks/useToastAndApiHandler";
 import { useUpdateCartProdMutation } from "../../../redux/features/cart/cart.api";
 import { getUserInfo } from "../../../utils";
 
-const CartSize = ({ cart }: any) => {
+const Quantity = ({ cart }: any) => {
   const { userId } = getUserInfo() || {};
 
-  const [defaultValue, setDefaultValue] = useState(cart?.size);
+  const [defaultValue] = useState(cart?.quantity);
 
   const [updateCartProd, { isLoading, isSuccess, isError, error, data }] =
     useUpdateCartProdMutation();
 
-  const handleUpdateCart = (value: string) => {
+  const handleUpdateQuantity = (value: number) => {
     updateCartProd({
       id: cart?.id,
       data: {
         userId: userId as string,
-        quantity: cart?.quantity,
+        quantity: value,
         color: cart?.color,
         productId: cart?.productId,
-        subTotal: cart?.subTotal,
-        size: value,
+        subTotal: cart?.products?.price * value,
+        size: cart?.size,
       },
     });
   };
 
-  const successMessage = "cart updated successfully";
-
-  useEffect(() => {
-    if (isError) {
-      setDefaultValue(cart?.size);
-    }
-  }, [cart?.size, isError]);
+  const successMessage = "quantity updated successfully";
 
   useToastAndApiHandler(
     { isLoading, isSuccess, isError, error, data },
@@ -41,13 +35,13 @@ const CartSize = ({ cart }: any) => {
   return (
     <td className="px-6 py-4 text-secondary-400 font-semibold">
       <select
-        onChange={(e) => handleUpdateCart(e.target.value)}
+        onChange={(e) => handleUpdateQuantity(Number(e.target.value))}
         defaultValue={defaultValue}
         className="select w-full"
       >
-        {cart?.products?.size.map((size: string) => (
-          <option key={size} value={size}>
-            {size}
+        {Array.from({ length: 6 }).map((_, idx) => (
+          <option key={idx + 1} value={idx + 1}>
+            {idx + 1}
           </option>
         ))}
       </select>
@@ -55,4 +49,4 @@ const CartSize = ({ cart }: any) => {
   );
 };
 
-export default CartSize;
+export default Quantity;

@@ -1,11 +1,27 @@
 import CardSkeleton from "../../components/CardSkeleton";
 
 import Header from "../../components/Header";
+import ProductNotFound from "../../components/ProductNotFound";
+import { useDebounced } from "../../hooks/useDebounced";
+import { useAppSelector } from "../../redux/app/hooks";
 import { useGetAllProductsQuery } from "../../redux/features/products/products.api";
 import ProductItem from "./components/ProductItem";
 
 const Products = () => {
-  const { data, isLoading, isError } = useGetAllProductsQuery(undefined);
+  const { searchText } = useAppSelector((state) => state.product) || {};
+
+  const query: Record<string, any> = {};
+
+  const debouncedTerm = useDebounced({
+    searchQuery: searchText as unknown as string,
+    delay: 600,
+  });
+
+  if (debouncedTerm) {
+    query["searchTerm"] = debouncedTerm;
+  }
+
+  const { data, isLoading, isError } = useGetAllProductsQuery({ ...query });
 
   return (
     <>
@@ -21,6 +37,7 @@ const Products = () => {
                 <ProductItem key={prod.id} product={prod} />
               ))}
         </div>
+        {data?.data.length === 0 && <ProductNotFound />}
       </div>
     </>
   );

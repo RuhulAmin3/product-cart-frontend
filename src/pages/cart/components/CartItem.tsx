@@ -5,7 +5,7 @@ import { useDeleteCartProdMutation } from "../../../redux/features/cart/cart.api
 import useToastAndApiHandler from "../../../hooks/useToastAndApiHandler";
 import Modal from "../../../components/Modal";
 import { useState } from "react";
-import CartSize from "./CartSize";
+import Quantity from "./Quantity";
 
 const CartItem = ({ cart }: any) => {
   const [showModal, setShowModal] = useState(false);
@@ -44,18 +44,14 @@ const CartItem = ({ cart }: any) => {
         <td className="px-6 py-4 text-secondary-400">
           <p className="font-semibold">৳ {cart?.products?.price}</p>
         </td>
-        {/* <td className="px-6 py-4 text-secondary-400 font-semibold">
+
+        <td className="px-6 py-4 text-secondary-400 font-semibold">
           <span className="p-2 rounded-full bg-success-50">{cart?.size}</span>
-        </td> */}
-        <CartSize cart={cart} />
+        </td>
         <td className="px-6 py-4 text-secondary-400 font-semibold">
           <span className="p-2 rounded-full bg-success-50">{cart?.color}</span>
         </td>
-        <td className="px-6 py-4 text-secondary-400 font-semibold">
-          <span className="p-2 rounded-full bg-success-50 ">
-            {cart?.quantity}
-          </span>
-        </td>
+        <Quantity cart={cart} />
         <td className="px-6 py-4 text-secondary-400 font-semibold">
           <span className="p-2 rounded-full bg-success-50 ">
             ৳ {cart?.subTotal}

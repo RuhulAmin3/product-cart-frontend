@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAddToCartMutation } from "../redux/features/cart/cart.api";
 import { getUserInfo } from "../utils";
 import useToastAndApiHandler from "../hooks/useToastAndApiHandler";
+import { useNavigate } from "react-router-dom";
 
 const Modal = ({
   showModal,
@@ -14,6 +15,7 @@ const Modal = ({
 }) => {
   const [AddToCart, { data, isSuccess, isError, isLoading, error }] =
     useAddToCartMutation();
+  const navigate = useNavigate();
   const { userId } = getUserInfo() || {};
   const [sizeIndex, setSizeIndex] = useState<string | null>(null);
   const [colorIndex, setColorIndex] = useState<string | null>(null);
@@ -65,6 +67,7 @@ const Modal = ({
   useEffect(() => {
     if (isSuccess) {
       setShowModal(false);
+      navigate("/carts");
     }
   }, [isSuccess]);
 
@@ -99,10 +102,7 @@ const Modal = ({
               <div className="flex flex-col md:flex-row gap-4 border-b-2 border-gray-200 pb-3">
                 <div className="basis-1/4 border-r-2 border-gray-200 pr-5">
                   <h4 className="text-lg mb-3 font-bold">{product.title}</h4>
-                  <img
-                    src="https://fabrilife.com/products/61961a4db1cd1-square.jpg?v=20"
-                    alt="image"
-                  />
+                  <img src={product?.image[0]} alt="image" />
                 </div>
                 <div className="basis-full flex gap-3">
                   <div className="border-r-2 border-gray-200 pr-4 basis-1/2">
@@ -131,7 +131,7 @@ const Modal = ({
                             onClick={() => handleColor(clr)}
                             key={idx}
                             className={`px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300 ${
-                              clr == colorIndex ? "bg-green-500" : ""
+                              clr == colorIndex ? `bg-green-500` : ""
                             }`}
                           >
                             {clr}

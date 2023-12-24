@@ -28,7 +28,13 @@ export const cartApi = baseApi.injectEndpoints({
     }),
 
     updateCartProd: builder.mutation({
-      query: ({ id, data }: { id: string; data: Record<string, string> }) => ({
+      query: ({
+        id,
+        data,
+      }: {
+        id: string;
+        data: Record<string, number | string>;
+      }) => ({
         url: `/cart/${id}`,
         method: "PATCH",
         body: data,
