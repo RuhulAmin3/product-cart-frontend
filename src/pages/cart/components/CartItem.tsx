@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import deleteSvg from "../../../assets/svg/delete.svg";
-import plusSvg from "../../../assets/svg/plus.svg";
 import { useDeleteCartProdMutation } from "../../../redux/features/cart/cart.api";
 import useToastAndApiHandler from "../../../hooks/useToastAndApiHandler";
 import Modal from "../../../components/Modal";
@@ -29,7 +28,7 @@ const CartItem = ({ cart }: any) => {
         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap flex items-center gap-2">
           <div className="flex items-center gap-3">
             <img
-              src="https://fabrilife.com/products/61961a4db1cd1-square.jpg?v=20"
+              src={cart?.products?.image[0]}
               alt="t-shirt"
               className="w-20 h-20 rounded-md hidden md:block"
             />
@@ -58,27 +57,21 @@ const CartItem = ({ cart }: any) => {
           </span>
         </td>
         <td className="px-6 py-4 text-secondary-400 font-semibold">
-          <div className="p-2 rounded-full bg-success-50 flex flex-col">
+          <div className="p-2 rounded-full bg-success-50 flex items-center justify-center gap-3">
             <button
               onClick={() => setShowModal(true)}
-              className="cursor-pointer bg-green-500 bg-green-500 text-white w-[80%] mb-2"
+              className="py-2 cursor-pointer text-sm bg-gray-800 hover:bg-gray-900 text-white w-[80%] hidden md:block text-md"
             >
-              <img
-                title="add another size"
-                src={plusSvg}
-                alt=""
-                className="w-10 h-10 sm:block md:hidden"
-              />
-              <span className="hidden md:block">Add another size</span>
+              Add another size
             </button>
             <span
               onClick={() => handleDelete()}
-              className="cursor-pointer text-white w-10 h-10 bg-red-500 hover:bg-red-700 p-2"
+              className="cursor-pointer text-white w-10 h-10 bg-primary p-2"
             >
               {isLoading ? (
                 <span className="loading loading-dots loading-sm"></span>
               ) : (
-                <img src={deleteSvg} alt="" className="w-full h-full" />
+                <img src={deleteSvg} alt="delete" className="w-full h-full" />
               )}
             </span>
           </div>

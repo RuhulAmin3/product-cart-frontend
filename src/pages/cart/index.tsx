@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../redux/app/hooks";
 import { setCartLength } from "../../redux/features/cart/cart.slice";
 import { useEffect } from "react";
 import CartSkeleton from "../../components/CartSkeleton";
+import EmptyCart from "./components/EmptyCart";
 
 const Carts = () => {
   const { data, isSuccess, isLoading } = useGetAllCartProdQuery(undefined);
@@ -29,11 +30,11 @@ const Carts = () => {
             <CartSkeleton />
           ) : data?.data?.length > 0 ? (
             <>
-              <h3 className="text-xl text-gray-500 text-center my-5">
-                Your Carts
+              <h3 className="text-2xl text-gray-900 text-center my-5 font-bold">
+                Your Cart
               </h3>
-              <table className="min-w-full text-lg text-left text-gray-500">
-                <thead className="text-md text-gray-500 bg-gray-50">
+              <table className="min-w-full text-lg text-left text-gray-900">
+                <thead className="text-md text-gray-900 bg-gray-50">
                   <tr>
                     <th
                       scope="col"
@@ -69,22 +70,20 @@ const Carts = () => {
               </table>
               <div className="flex items-center justify-center my-5">
                 <div>
-                  <p className="text-xl font-semibold">
+                  <p className="text-2xl font-semibold">
                     Total Amount(৳):{" "}
-                    <span className="text-green-600 font-bold text-xl">
-                      {totalAmount}
-                    </span>{" "}
+                    <span className="font-bold">{totalAmount}</span>{" "}
                   </p>
                   <button
                     onClick={() =>
                       toast.error("Place order functionality is not available")
                     }
-                    className="text-white bg-green-500 hover:bg-green-600 font-bold w-full my-5 py-2"
+                    className="text-white bg-gray-800 hover:bg-gray-900 font-bold w-full my-5 py-2"
                   >
                     Place Order
                   </button>
                   <Link to={"/products"}>
-                    <button className="text-white bg-orange-500 hover:bg-orange-600 font-bold w-full my-5 py-2">
+                    <button className="text-white bg-primary font-bold w-full my-5 py-2">
                       Continue Shopping
                     </button>
                   </Link>
@@ -92,18 +91,7 @@ const Carts = () => {
               </div>
             </>
           ) : (
-            <div className="flex h-[80vh] items-center justify-center">
-              <div>
-                <p className="text-xl text-center text-gray-500">
-                  Your cart is empty
-                </p>
-                <Link to={"/products"}>
-                  <button className="text-white bg-orange-500 hover:bg-orange-600 font-bold w-full my-5 py-2">
-                    Continue Shopping
-                  </button>
-                </Link>
-              </div>
-            </div>
+            <EmptyCart />
           )}
         </>
       </section>

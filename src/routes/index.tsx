@@ -4,6 +4,8 @@ import { publicRoutes } from "./publicRoutes";
 import PublicRouteGuard from "./PublicRoutesGuard";
 import { privateRoutes } from "./privateRoutes";
 import PrivateRouteGuard from "./PrivateRoutesGuard";
+import Products from "../pages/products";
+import ProductDetails from "../pages/productDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -28,4 +30,15 @@ export const routes = createBrowserRouter([
       </PrivateRouteGuard>
     ),
   })),
+
+  // general routes
+
+  {
+    path: "/products",
+    element: <Products />,
+  },
+  {
+    path: "/products/:id",
+    element: <ProductDetails />,
+  },
 ]);

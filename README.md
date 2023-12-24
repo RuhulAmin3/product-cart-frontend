@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# Starting with task Management frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is [product-cart](https://eco-product-cart.netlify.app/)
 
-Currently, two official plugins are available:
+#### Live Link: https://eco-product-cart.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### To check the task:
 
-## Expanding the ESLint configuration
+- you can Login email: john@gmail.com, password:123456
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Some Feature of product-cart
 
-- Configure the top-level `parserOptions` property like this:
+- User can register / Login account after login user can see his own previous added all added cart products and he can add, delete and update product to his cart.
+- User can search product with the product title, category and the result will come from server.
+- debounce technic is applied in search function to better performance optimization.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- User can logout.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Explanation of the using technologies.
+
+- I am designed full website using tailwind css.
+- Used Redux toolkit and useState hook for state management.
+- Used Redux toolkit query to make all API implementations.
+- making reusable component and use formik to create necessary form such as signin, register form.
+- you can see toast message after each complete interaction.
+-
+
+### Technology
+
+- Typescript
+- React.js
+- tailwind css
+- Redux toolkit
+- Redux toolkit Query

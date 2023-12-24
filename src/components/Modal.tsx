@@ -3,6 +3,7 @@ import { useAddToCartMutation } from "../redux/features/cart/cart.api";
 import { getUserInfo } from "../utils";
 import useToastAndApiHandler from "../hooks/useToastAndApiHandler";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Modal = ({
   showModal,
@@ -53,6 +54,7 @@ const Modal = ({
     }
 
     if (sizeIndex && colorIndex) {
+      if (!userId) return toast.error("login first to add product to cart");
       AddToCart({
         quantity: quantity,
         color: colorIndex,
@@ -106,15 +108,15 @@ const Modal = ({
                 </div>
                 <div className="basis-full flex gap-3">
                   <div className="border-r-2 border-gray-200 pr-4 basis-1/2">
-                    <p className="text-lg font-bold">Choose size</p>
+                    <p className="text-md font-bold">Choose size</p>
                     {/* size handle */}
                     <div className="flex gap-3">
                       {product.size.map((s: string, idx: number) => (
                         <div
                           onClick={() => handleSize(s)}
                           key={idx}
-                          className={`px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300 ${
-                            s == sizeIndex ? "bg-green-500" : ""
+                          className={`px-5 capitalize cursor-pointer py-1 text-md my-4 border border-gray-200 hover:border-gray-900 ${
+                            s == sizeIndex ? "bg-gray-800 text-white" : ""
                           }`}
                         >
                           {s}
@@ -123,15 +125,15 @@ const Modal = ({
                     </div>
                     {sizeError && <p className="text-red-500">{sizeError}</p>}
                     {/* color handle */}
-                    <p className="text-lg font-bold">Choose Color</p>
+                    <p className="text-md font-bold">Choose Color</p>
                     <div className="flex gap-3">
                       {product.color.map((clr: string, idx: number) => {
                         return (
                           <div
                             onClick={() => handleColor(clr)}
                             key={idx}
-                            className={`px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300 ${
-                              clr == colorIndex ? `bg-green-500` : ""
+                            className={`px-5 capitalize cursor-pointer py-1 text-md my-4 border border-gray-200 hover:border-gray-900 ${
+                              clr == colorIndex ? "bg-gray-800 text-white" : ""
                             }`}
                           >
                             {clr}
@@ -142,40 +144,40 @@ const Modal = ({
                     {colorError && <p className="text-red-500">{colorError}</p>}
                   </div>
                   <div>
-                    <p className="text-lg font-bold">Quantity:</p>
+                    <p className="text-md font-bold">Quantity:</p>
                     <div className="flex gap-3">
                       <button
                         onClick={() => handleDecrease()}
                         disabled={quantity === 1}
-                        className={`px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300 ${
-                          quantity === 1 ? "bg-gray-300" : ""
+                        className={`px-5 cursor-pointer py-2 text-lg my-4 border border-gray-200 ${
+                          quantity === 1 ? "bg-gray-300 cursor-not-allowed" : ""
                         }`}
                       >
                         {" "}
                         -{" "}
                       </button>
-                      <div className="px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300">
+                      <div className="px-5 cursor-pointer py-2 text-lg my-4 border border-gray-200">
                         {" "}
                         {quantity}{" "}
                       </div>
                       <button
                         onClick={() => handleIncrease()}
-                        className="px-7 cursor-pointer py-3 text-lg my-4 border-2 border-gray-300"
+                        className="px-5 cursor-pointer py-2 text-lg my-4 border border-gray-200"
                       >
                         {" "}
                         +{" "}
                       </button>
                     </div>
                     <div className="flex gap-3">
-                      <div className="border-r-2 border-gray-300 pr-3">
-                        <p className="text-lg font-bold">Unit Price:</p>
-                        <p className="text-green-600 font-bold text-xl">
+                      <div className="border-r border-gray-200 pr-3">
+                        <p className="text-md font-bold">Unit Price:</p>
+                        <p className="text-gray-900 font-bold text-lg">
                           ৳{product.price}
                         </p>
                       </div>
                       <div>
                         <p className="text-lg font-bold">Sub Total:</p>
-                        <p className="text-green-600 font-bold text-xl">
+                        <p className="text-gray-900 font-bold text-lg">
                           ৳{subTotal}
                         </p>
                       </div>
@@ -187,13 +189,13 @@ const Modal = ({
               <div className="py-3 flex justify-between">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-gray-800 hover:bg-gray-900 text-white py-2 px-4"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleAddToCart()}
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-primary text-white font-bold py-2 px-4"
                 >
                   {isLoading ? "Loading..." : "Add To Cart"}
                 </button>
