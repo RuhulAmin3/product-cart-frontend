@@ -40,12 +40,14 @@ const Header = () => {
               className="w-full md:w-1/2 p-2 bg-white text-gray-800 border border-gray-200 outline-none focus:border-primary round-sm"
             />
           </div>
-          <Link
-            to="/"
-            className="cursor-pointer relative mr-5 hover:text-primary"
-          >
-            Login
-          </Link>
+          {!userId && (
+            <Link
+              to="/"
+              className="cursor-pointer relative mr-5 hover:text-primary"
+            >
+              Login
+            </Link>
+          )}
           <Link to="/carts" className="cursor-pointer relative mr-5">
             <ShoppingCart />
             <p className="absolute -top-2 -right-2 z-10 h-4 w-4 rounded-full bg-primary flex items-center justify-center text-white text-xs">

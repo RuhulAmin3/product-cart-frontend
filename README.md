@@ -10,8 +10,10 @@ This project is [product-cart](https://eco-product-cart.netlify.app/)
 
 ### Some Feature of product-cart
 
-- User can register / Login account after login user can see his own previous added all added cart products and he can add, delete and update product to his cart.
+- User can register / Login account after login user can see his own previous added all added cart products and he can add, delete and update product to his own cart.
+
 - User can search product with the product title, category and the result will come from server.
+
 - debounce technic is applied in search function to better performance optimization.
 
 - User can logout.
