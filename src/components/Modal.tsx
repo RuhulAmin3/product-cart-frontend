@@ -106,8 +106,8 @@ const Modal = ({
                   <h4 className="text-lg mb-3 font-bold">{product.title}</h4>
                   <img src={product?.image[0]} alt="image" />
                 </div>
-                <div className="basis-full flex gap-3">
-                  <div className="border-r-2 border-gray-200 pr-4 basis-1/2">
+                <div className="basis-full flex flex-col md:flex-row gap-2 md:gap-3">
+                  <div className="border-b-2 md:border-b-0 md:border-r-2 border-gray-200 pr-4 basis-1/2">
                     <p className="text-md font-bold">Choose size</p>
                     {/* size handle */}
                     <div className="flex gap-3">
