@@ -1,4 +1,4 @@
-# Starting with task Management frontend
+# Starting with Product Cart frontend
 
 This project is [product-cart](https://eco-product-cart.netlify.app/)
 
